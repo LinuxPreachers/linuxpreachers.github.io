@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3f5ef" />
+    <meta
+      name="description"
+      content="Un laboratorio interactivo para explorar el lanzamiento de aceitunas, su rango óptimo y los algoritmos que lo resuelven."
+    />
+    <title>Lanzamiento de aceitunas · Laboratorio interactivo</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --background: #f3f5ef;
+        --surface: #fffefa;
+        --ink: #172e2a;
+        --muted: #50645d;
+        --line: #d6dfd4;
+        --olive: #176554;
+        --olive-wash: #dceee4;
+        --orange: #a04921;
+        --blue: #305b9c;
+        font: 16px / 1.5 system-ui, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { margin: 0; background: var(--background); color: var(--ink); }
+      a { color: inherit; }
+      .wrap { width: min(1120px, 100% - 2rem); margin: 0 auto; }
+      .bar {
+        border-bottom: 1px solid var(--line);
+        background: color-mix(in srgb, var(--background) 90%, transparent);
+      }
+      nav { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+      .brand { display: inline-flex; align-items: center; gap: .7rem; font-weight: 750; text-decoration: none; }
+      .brand-mark { display: grid; width: 2rem; aspect-ratio: 1; place-items: center; border-radius: 50%; background: var(--olive); color: white; }
+      .tabs { display: flex; flex-wrap: wrap; gap: .25rem; }
+      .tabs a { padding: .55rem .75rem; border-radius: 999px; color: var(--muted); font-size: .9rem; text-decoration: none; }
+      .tabs a:hover, .tabs a:focus-visible { background: var(--olive-wash); color: var(--olive); outline: none; }
+      main { padding: clamp(3rem, 8vw, 6.5rem) 0 4rem; }
+      .intro { max-width: 740px; margin-bottom: 2.5rem; }
+      .eyebrow { margin: 0 0 .75rem; color: var(--olive); font-size: .76rem; font-weight: 800; letter-spacing: .13em; }
+      h1 { max-width: 700px; margin: 0; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.02; letter-spacing: -.055em; }
+      h1 span { color: var(--olive); }
+      .lead { max-width: 610px; margin: 1.2rem 0 0; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.22rem); }
+      .section-heading { margin: 0 0 1rem; font-size: 1rem; }
+      .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+      .card { display: flex; min-height: 290px; flex-direction: column; align-items: flex-start; padding: 1.4rem; border: 1px solid var(--line); border-radius: 1.1rem; background: var(--surface); text-decoration: none; transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+      .card:hover, .card:focus-visible { transform: translateY(-4px); border-color: #8ab3a0; box-shadow: 0 16px 36px #172e2a12; outline: none; }
+      .number { display: grid; width: 2.5rem; aspect-ratio: 1; place-items: center; margin-bottom: 2.25rem; border-radius: .8rem; background: var(--olive-wash); color: var(--olive); font-weight: 800; }
+      .card:nth-child(2) .number { background: #f7e8df; color: var(--orange); }
+      .card:nth-child(3) .number { background: #e7edf8; color: var(--blue); }
+      .card h3 { margin: 0; font-size: 1.35rem; letter-spacing: -.025em; }
+      .card p { margin: .65rem 0 1.5rem; color: var(--muted); }
+      .card-cta { display: inline-flex; gap: .5rem; align-items: center; margin-top: auto; color: var(--olive); font-weight: 750; }
+      footer { padding: 1.4rem 0 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+      @media (max-width: 760px) {
+        nav { align-items: flex-start; flex-direction: column; padding: 1rem 0; }
+        .tabs { width: 100%; }
+        .tabs a { padding-inline: .55rem; font-size: .82rem; }
+        .cards { grid-template-columns: 1fr; }
+        .card { min-height: 230px; }
+        .number { margin-bottom: 1.5rem; }
+      }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+    </style>
+  </head>
+  <body>
+    <header class="bar">
+      <nav class="wrap" aria-label="Navegación principal">
+        <a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true">◉</span> Lanzamiento de aceitunas</a>
+        <div class="tabs" aria-label="Experiencias">
+          <a href="https://linuxpreachers.github.io/tools/aceitunas-aro/">Explorar el aro</a>
+          <a href="https://linuxpreachers.github.io/tools/aceitunas-reducciones/">Ver las reducciones</a>
+          <a href="https://linuxpreachers.github.io/tools/aceitunas-comparacion/">Comparar algoritmos</a>
+        </div>
+      </nav>
+    </header>
+    <main id="inicio" class="wrap">
+      <section class="intro" aria-labelledby="titulo">
+        <p class="eyebrow">LABORATORIO INTERACTIVO · PROGRAMACIÓN AVANZADA</p>
+        <h1 id="titulo">De cada tiro,<br /><span>una idea nueva.</span></h1>
+        <p class="lead">Explorá cómo los lanzamientos se convierten en un problema de intervalos y descubrí distintas maneras de encontrar el mejor resultado.</p>
+      </section>
+      <section aria-labelledby="experiencias">
+        <h2 class="section-heading" id="experiencias">Elegí por dónde empezar</h2>
+        <div class="cards">
+          <a class="card" href="https://linuxpreachers.github.io/tools/aceitunas-aro/">
+            <span class="number" aria-hidden="true">01</span>
+            <h3>Explorá el aro</h3>
+            <p>Probá coordenadas y observá qué tiros quedan dentro del aro.</p>
+            <span class="card-cta">Abrir experiencia <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="card" href="https://linuxpreachers.github.io/tools/aceitunas-reducciones/">
+            <span class="number" aria-hidden="true">02</span>
+            <h3>Entendé la reducción</h3>
+            <p>Descubrí cómo pasar de los tiros al intervalo de radio óptimo.</p>
+            <span class="card-cta">Abrir experiencia <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="card" href="https://linuxpreachers.github.io/tools/aceitunas-comparacion/">
+            <span class="number" aria-hidden="true">03</span>
+            <h3>Compará algoritmos</h3>
+            <p>Seguí a Kadane y a fuerza bruta con los mismos aportes, paso a paso.</p>
+            <span class="card-cta">Abrir experiencia <span aria-hidden="true">→</span></span>
+          </a>
+        </div>
+      </section>
+    </main>
+    <footer><div class="wrap">Un recorrido interactivo por algoritmos y geometría.</div></footer>
+  </body>
+</html>
